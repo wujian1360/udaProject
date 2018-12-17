@@ -1,0 +1,46 @@
+'''
+
+ADT -- 抽象数据类型例子
+1、_items选用何种数据结构作为内核
+2、能不能满足操作要求add、remove
+3、效率如何，实现复杂度等问题
+'''
+
+
+class Bag(object):
+
+    def __init__(self, size=10):
+        self.size = size
+        self._items = list()
+    
+    def add(self, item):
+        if len(self) > self.size:
+            raise Exception("Bag is full!")
+        self._items.append(item)
+    
+    def remove(self, item):
+        self._items.remove(item)
+    
+    def __len__(self):
+        return len(self._items)
+
+    def __iter__(self):
+        for item in self._items:
+            yield item
+
+def test_bag():
+    bag = Bag()
+    bag.add(1)
+    bag.add(3)
+    bag.add(5)
+    assert len(bag) == 3
+    bag.remove(1)
+    assert len(bag) == 2
+    for i in bag:
+        print(i)
+
+test_bag()
+print('''
+# 正常调用与测试调用
+# python c:/Users/Administrator/Desktop/test.py
+# py.test c:/Users/Administrator/Desktop/test.py''')
